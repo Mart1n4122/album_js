@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="hu">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -9,28 +9,38 @@
 <body>
     <header>
         <h1>Album Manager</h1>
-        <input type="text" id="searchBar" placeholder="Search albums...">
+        <button id="add-album-btn" class="primary-btn">
+            <span class="icon">+</span> Add Album
+        </button>
+        <div class="search-container">
+            <input type="text" id="search-bar" placeholder="Search albums...">
+        </div>
     </header>
     <main>
-        <section id="albumList">
-            <h2>Albums</h2>
-            <ul id="albums"></ul>
-        </section>
-        <section id="albumDetails">
-            <h2>Album Details</h2>
-            <div id="details"></div>
-        </section>
-        <section id="albumForm">
-            <h2>Add/Modify Album</h2>
-            <form id="albumFormElement">
-                <input type="text" id="bandName" placeholder="Band Name" required>
-                <input type="text" id="albumTitle" placeholder="Album Title" required>
-                <input type="number" id="numberOfSongs" placeholder="Number of Songs" required>
-                <input type="number" id="releaseYear" placeholder="Release Year" required>
-                <button type="submit">Save Album</button>
-            </form>
+        <section id="albums-container" class="album-grid">
         </section>
     </main>
+
+    <div id="album-modal" class="modal hidden">
+        <div class="modal-content">
+            <h2 id="modal-title">Add Album</h2>
+            <form id="album-form">
+                <label for="artist">Artist:</label>
+                <input type="text" id="artist" name="artist" placeholder="Enter artist name" required>
+                <label for="title">Title:</label>
+                <input type="text" id="title" name="title" placeholder="Enter album title" required>
+                <label for="duration">Duration:</label>
+                <input type="text" id="duration" name="duration" placeholder="e.g., 45:30" required>
+                <label for="trackCount">Track Count:</label>
+                <input type="number" id="trackCount" name="trackCount" placeholder="Enter number of tracks" required>
+                <div class="form-actions">
+                    <button type="submit" class="primary-btn">Save</button>
+                    <button type="button" id="cancel-btn" class="secondary-btn">Cancel</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script src="scripts.js"></script>
 </body>
 </html>
