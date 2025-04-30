@@ -10,7 +10,6 @@ const searchBar = document.getElementById('search-bar');
 let albums = [];
 let editAlbumId = null;
 
-// Fetch all albums from the server
 async function fetchAlbums() {
     try {
         const response = await fetch(`${baseUrl}/albums`);
@@ -22,7 +21,6 @@ async function fetchAlbums() {
     }
 }
 
-// Render albums in the container
 function renderAlbums(filteredAlbums = albums) {
     albumsContainer.innerHTML = '';
     filteredAlbums.forEach(album => {
@@ -49,7 +47,6 @@ function renderAlbums(filteredAlbums = albums) {
     });
 }
 
-// Open the modal for adding a new album
 function handleAddAlbum() {
     editAlbumId = null;
     modalTitle.textContent = 'Add Album';
@@ -57,7 +54,6 @@ function handleAddAlbum() {
     albumModal.classList.remove('hidden');
 }
 
-// Open the modal for editing an album
 function handleEditAlbum(event) {
     const id = event.target.dataset.id;
     const album = albums.find(album => album.id == id);
@@ -72,7 +68,6 @@ function handleEditAlbum(event) {
     albumModal.classList.remove('hidden');
 }
 
-// Handle deleting an album
 async function handleDeleteAlbum(event) {
     const id = event.target.dataset.id;
     try {
@@ -83,7 +78,6 @@ async function handleDeleteAlbum(event) {
     }
 }
 
-// Handle form submission for adding or editing an album
 albumForm.addEventListener('submit', async (event) => {
     event.preventDefault();
 
@@ -92,19 +86,17 @@ albumForm.addEventListener('submit', async (event) => {
         title: albumForm.title.value,
         totalLength: albumForm.duration.value,
         songCount: parseInt(albumForm.trackCount.value, 10),
-        songs: [] // Placeholder for songs, can be extended later
+        songs: []
     };
 
     try {
         if (editAlbumId) {
-            // Update existing album
             await fetch(`${baseUrl}/albums/${editAlbumId}`, {
                 method: 'PUT',
                 headers: { 'Content-Type': 'application/json' },
                 body: JSON.stringify(albumData),
             });
         } else {
-            // Add new album
             await fetch(`${baseUrl}/albums`, {
                 method: 'POST',
                 headers: { 'Content-Type': 'application/json' },
@@ -119,12 +111,10 @@ albumForm.addEventListener('submit', async (event) => {
     }
 });
 
-// Close the modal
 cancelBtn.addEventListener('click', () => {
     albumModal.classList.add('hidden');
 });
 
-// Search albums
 searchBar.addEventListener('input', () => {
     const query = searchBar.value.toLowerCase();
     const filteredAlbums = albums.filter(album =>
@@ -134,6 +124,5 @@ searchBar.addEventListener('input', () => {
     renderAlbums(filteredAlbums);
 });
 
-// Initialize
 addAlbumBtn.addEventListener('click', handleAddAlbum);
 fetchAlbums();

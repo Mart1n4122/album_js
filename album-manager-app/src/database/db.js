@@ -75,8 +75,6 @@ export async function initializeDatabase() {
         await dbRun("INSERT INTO songs (albumId, title, length) VALUES (?, ?, ?)", [albumId1, title, length]);
     }
 
-   
-
     // ASTROWORLD
     const songs2 = [
         ["STARGAZING", "4:30"],

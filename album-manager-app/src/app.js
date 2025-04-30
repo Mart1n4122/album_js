@@ -6,7 +6,6 @@ const app = express();
 app.use(express.json());
 app.use(cors());
 
-// Hiba kezelése
 app.use((err, req, res, next) => {
     if (err) {
         res.status(500).json({ message: `Error: ${err.message}` });
